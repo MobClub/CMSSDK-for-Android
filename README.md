@@ -8,7 +8,7 @@ This project uses the main functions of CMSSDK.<br>
 
 Getting up
 ----------
-We offer one popular IDE guide to integrate SMSSDK.
+We offer one popular IDE guide to integrate CMSSDK.
 
 ###Eclipse
 
