@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,9 +45,8 @@ public class NewsViewItem3 extends LinearLayout {
 		this.setOrientation(LinearLayout.VERTICAL);
 		int dp15 = ResHelper.dipToPx(context, 15);
 		int dp12 = ResHelper.dipToPx(context, 12);
-		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		this.setPadding(dp15, dp12, dp15, dp12);
-		this.setLayoutParams(lp);
+		this.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
 		
 		//标题
 		tvNewsTitle = new TextView(context);
@@ -57,7 +57,7 @@ public class NewsViewItem3 extends LinearLayout {
 		tvNewsTitle.setMinHeight(dp24);
 		tvNewsTitle.setLineSpacing(0, 1.15f);
 		tvNewsTitle.setEllipsize(TextUtils.TruncateAt.END);
-		lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		this.addView(tvNewsTitle, lp);
 		
 		//下一图片布局
@@ -91,7 +91,7 @@ public class NewsViewItem3 extends LinearLayout {
 		}
 		int dp5 = ResHelper.dipToPx(context, 5);
 		tvImgCount.setPadding(dp10, dp5, dp10, dp5);
-		RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		rlp.setMargins(0, 0, dp5, dp5);

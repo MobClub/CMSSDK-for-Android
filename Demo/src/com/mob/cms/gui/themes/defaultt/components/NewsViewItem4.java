@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,9 +41,8 @@ public class NewsViewItem4 extends LinearLayout {
 		this.setOrientation(LinearLayout.VERTICAL);
 		int dp15 = ResHelper.dipToPx(context, 15);
 		int dp12 = ResHelper.dipToPx(context, 12);
-		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		this.setPadding(dp15, dp12, dp15, dp12);
-		this.setLayoutParams(lp);
+		this.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 		
 		//标题
 		tvNewsTitle = new TextView(context);
@@ -53,7 +53,7 @@ public class NewsViewItem4 extends LinearLayout {
 		tvNewsTitle.setMinHeight(dp24);
 		tvNewsTitle.setLineSpacing(0, 1.15f);
 		tvNewsTitle.setEllipsize(TextUtils.TruncateAt.END);
-		lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		this.addView(tvNewsTitle, lp);
 		
 		//图片列表

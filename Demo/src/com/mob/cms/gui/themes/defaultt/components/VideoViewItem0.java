@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,12 +47,11 @@ public class VideoViewItem0 extends LinearLayout implements View.OnClickListener
 	private void initView(Context context) {
 		this.setOrientation(LinearLayout.VERTICAL);
 		int dp15 = ResHelper.dipToPx(context, 15);
-		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		this.setLayoutParams(lp);
+		this.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 
 		LinearLayout ll = new LinearLayout(context);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
-		lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		int dp10 = ResHelper.dipToPx(context, 10);
 		lp.setMargins(dp15, dp15, dp10, 0);
 		this.addView(ll, lp);

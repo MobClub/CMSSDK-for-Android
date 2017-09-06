@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,11 +33,10 @@ public class CommentViewItem extends RelativeLayout {
 	}
 
 	private void initView(Context context) {
-		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		int dp20 = ResHelper.dipToPx(context, 20);
 		int dp10 = ResHelper.dipToPx(context, 10);
 		this.setPadding(dp20, dp10, dp20, dp10);
-		this.setLayoutParams(lp);
+		this.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 
 		//评论者头像
 		aivUserIcon = new AsyncImageView(context);
@@ -45,7 +45,7 @@ public class CommentViewItem extends RelativeLayout {
 		aivUserIcon.setRound(dp28);
 		aivUserIcon.setScaleToCropCenter(true);
 		int dp40 = ResHelper.dipToPx(context, 40);
-		lp = new LayoutParams(dp40, dp40);
+		LayoutParams lp = new LayoutParams(dp40, dp40);
 		int dp4 = ResHelper.dipToPx(context, 4);
 		lp.rightMargin = dp10;
 		lp.topMargin = dp4;

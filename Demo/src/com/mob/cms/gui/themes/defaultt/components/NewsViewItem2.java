@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,14 +42,13 @@ public class NewsViewItem2 extends LinearLayout {
 	private void initView(Context context) {
 		this.setOrientation(LinearLayout.HORIZONTAL);
 		int dp15 = ResHelper.dipToPx(context, 15);
-		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		this.setPadding(dp15, dp15, dp15, dp15);
-		this.setLayoutParams(lp);
+		this.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 		
 		//左边布局
 		LinearLayout llLeft = new LinearLayout(context);
 		llLeft.setOrientation(LinearLayout.VERTICAL);
-		lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		lp.weight = 1;
 		this.addView(llLeft, lp);
 		

@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,9 +38,8 @@ public class NewsViewItem0 extends LinearLayout {
 	private void initView(Context context) {
 		this.setOrientation(LinearLayout.VERTICAL);
 		int dp15 = ResHelper.dipToPx(context, 15);
-		LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		this.setPadding(dp15, dp15, dp15, dp15);
-		this.setLayoutParams(lp);
+		this.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 		
 		//标题
 		tvNewsTitle = new TextView(context);
@@ -48,7 +48,7 @@ public class NewsViewItem0 extends LinearLayout {
 		tvNewsTitle.setTextColor(0xff222222);
 		tvNewsTitle.setLineSpacing(0, 1.15f);
 		tvNewsTitle.setEllipsize(TextUtils.TruncateAt.END);
-		lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		addView(tvNewsTitle, lp);
 		
 		//置顶，评论，时间

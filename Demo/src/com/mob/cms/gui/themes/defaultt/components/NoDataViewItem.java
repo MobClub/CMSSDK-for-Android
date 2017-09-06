@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,12 +31,11 @@ public class NoDataViewItem extends LinearLayout {
 	
 	private void initView(Context context) {
 		this.setOrientation(LinearLayout.VERTICAL);
-		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		setLayoutParams(lp);
+		setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 
 		ImageView iv = new ImageView(getContext());
 		iv.setImageResource(ResHelper.getBitmapRes(getContext(), "cmssdk_default_no_data"));
-		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.gravity = Gravity.CENTER;
 		int dp50 = ResHelper.dipToPx(getContext(), 50); 
 		lp.topMargin = dp50;
