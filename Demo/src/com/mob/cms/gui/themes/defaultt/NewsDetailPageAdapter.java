@@ -146,7 +146,7 @@ public class NewsDetailPageAdapter extends PageAdapter<NewsDetailPage> implement
 			}
 		};
 		newsWebView.setWebChromeClient(webChromeClient);
-		newsWebView.loadUrl("file:///android_asset/index.html");
+		newsWebView.loadUrl("file:///android_asset/CMSSDK/index.html");
 
 		//视频下面的评论框
 		commentToolsView = new CommentToolsView(activity);
