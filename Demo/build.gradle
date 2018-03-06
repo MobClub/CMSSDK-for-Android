@@ -1,0 +1,202 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+buildscript {
+    repositories {
+        jcenter()
+		maven {
+            url "http://mvn.mob.com/android"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.2'
+		classpath 'com.mob.sdk:MobSDK:+'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+String findBuildTools() {
+    def localProperties = new File(rootProject.projectDir, "local.properties")
+    if (localProperties.exists()) {
+        def properties = new Properties()
+        localProperties.withInputStream {
+            instr->properties.load(instr)
+        }
+        def sdkDir = properties.getProperty('sdk.dir')
+        def buildTools = new File(sdkDir, "build-tools")
+        if (buildTools.exists()) {
+            def tools = buildTools.list()
+            if (tools != null) {
+                Arrays.sort(tools)
+                return tools[tools.length - 1]
+            }
+        }
+    }
+    return "25.0.2"
+}
+
+String findCMSSDKVersionName() {
+	def versionName = "1.0.0"
+	def libs = new File(projectDir, "/libs")
+	libs.list().each { name ->
+		def upName = name.toUpperCase()
+		if (upName.startsWith("CMSSDK-") && upName.endsWith(".JAR")) {
+			versionName = name.substring("CMSSDK-".length(), name.length() - ".JAR".length())
+			return
+		}
+	}
+    return versionName
+}
+
+int findCMSSDKVersionCode() {
+	def versionCode = 0
+	findCMSSDKVersionName().split("\\.").each { v ->
+		versionCode = versionCode * 100 + Integer.parseInt(v)
+	}
+	return versionCode == 0 ? 17 : versionCode
+}
+
+int findCMSSDKMinSdkVersion() {
+    def file = new File(projectDir, "AndroidManifest.xml")
+    def xml = new XmlSlurper()
+    def manifest = xml.parse(file)
+    try {
+        def tmpValue = manifest.getAt("uses-sdk").getProperty('@android:minSdkVersion').toString()
+        return Integer.parseInt(tmpValue)
+    } catch (Throwable t) {
+        return 15
+    }
+}
+
+int findCMSSDKTargetSdkVersion() {
+    def file = new File(projectDir, "AndroidManifest.xml")
+    def xml = new XmlSlurper()
+    def manifest = xml.parse(file)
+    try {
+        def tmpValue = manifest.getAt("uses-sdk").getProperty('@android:targetSdkVersion').toString()
+        return Integer.parseInt(tmpValue)
+    } catch (Throwable t) {
+       return 25
+    }
+}
+
+int findCMSSDKCompileSdkVersion() {
+    def projProp = new File(projectDir, "project.properties")
+    if (projProp.exists()) {
+        def properties = new Properties()
+        projProp.withInputStream {
+            instr->properties.load(instr)
+        }
+        def target = properties.getProperty('target').trim()
+        def pref = "android-"
+        if (target != null && target.startsWith(pref)) {
+            try {
+                return Integer.parseInt(target.substring(pref.length()))
+            } catch (Throwable t) {
+                return 25;
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion findCMSSDKCompileSdkVersion()
+    buildToolsVersion findBuildTools()
+
+    defaultConfig {
+        applicationId "com.mob.cms.demo1"
+        minSdkVersion findCMSSDKMinSdkVersion()
+        targetSdkVersion findCMSSDKTargetSdkVersion()
+        versionCode findCMSSDKVersionCode()
+        versionName findCMSSDKVersionName()
+    }
+    signingConfigs {
+        config {
+            storeFile file("demokey.keystore")
+            storePassword "123456"
+            keyAlias "demokey.keystore"
+            keyPassword "123456"
+        }
+    }
+
+    sourceSets.main {
+		manifest.srcFile 'AndroidManifest.xml'
+        assets.srcDirs = ['assets']
+        java.srcDirs = ['src']
+        aidl.srcDirs = ['src']
+        res.srcDirs = ['res']
+        jniLibs.srcDirs = ['libs']
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+}
+
+MobSDK {
+    appKey "moba6b6c6d6"
+    appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
+
+    ShareSDK {
+        gui true
+        devInfo {
+            SinaWeibo {
+                appKey "1065584115"
+                appSecret "ca6260e975e1ccd0787216f12adf7de6"
+                callbackUri "http://cmssdk.mob.com"
+                shareByAppClient true
+            }
+            Wechat {
+                appId "wxb4de64c75a0924bf"
+                appSecret "c57c9b8cd22383612e79d1881c3f9942"
+            }
+            WechatMoments {
+                appId "wxb4de64c75a0924bf"
+                appSecret "c57c9b8cd22383612e79d1881c3f9942"
+            }
+            QQ {
+                appId "1106255273"
+                appKey "BGyUOnkOROW8IFid"
+				shareByAppClient true
+            }
+            QZone {
+                appId "1106255273"
+                appKey "BGyUOnkOROW8IFid"
+				shareByAppClient true
+            }
+            Facebook {
+                appKey "1379808742089028"
+                appSecret "e3178d696f65f2ed8e544a85df0ba63a"
+                callbackUri "https://mob.com"
+            }
+            Email {
+
+            }
+        }
+    }
+
+	SMSSDK {}
+    UMSSDK {}
+    CMSSDK {}
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
