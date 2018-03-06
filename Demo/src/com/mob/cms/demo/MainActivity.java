@@ -12,6 +12,7 @@ import android.widget.LinearLayout.LayoutParams;
 
 import com.mob.cms.gui.CMSGUI;
 import com.mob.cms.gui.themes.defaultt.DefaultTheme;
+import com.mob.cms.CMSSDK;
 import com.mob.tools.utils.DeviceHelper;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -52,7 +53,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			case R.string.use_umssdk: {
 				CMSGUI.setTheme(DefaultTheme.class);
 				// to use this entrance, you have to integrate UMSSDK first
-				CMSGUI.showNewsListPageWithUMSSDKUser(com.mob.ums.gui.themes.defaultt.DefaultTheme.class);
+				CMSGUI.showNewsListPageWithUMSSDKUser();
 			} break;
 			case R.string.use_custom: {
 				CMSGUI.setTheme(DefaultTheme.class);
