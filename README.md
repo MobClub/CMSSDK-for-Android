@@ -1,7 +1,7 @@
 CMSSDK for Android
 ==================
 
-This is a demonstration project for <a href="http://www.mob.com/downloadDetail/CMS/android">CMSSDK</a>.
+This is a demonstration project for <a href="http://www.mob.com/mobile#/download/cmssdk">CMSSDK</a>.
 
 This project uses the main functions of CMSSDK.<br>
 
